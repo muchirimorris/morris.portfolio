@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Morris Muchiri | Software Developer & Designer</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --secondary: #8b5cf6;
+      --accent: #10b981;
+      --dark: #111827;
+      --darker: #0a0f1c;
+    }
+    
+    body {
+      background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+      min-height: 100vh;
+    }
+    
+    nav a { 
+      transition: color 0.3s ease; 
+      position: relative;
+    }
+    
+    nav a:not(.resume-btn)::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+    
+    nav a:not(.resume-btn):hover::after {
+      width: 100%;
+    }
+    
+    .floating-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .floating-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    }
+    
+    .profile-img {
+      filter: grayscale(0.2);
+      transition: all 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .profile-img::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(139, 92, 246, 0.3) 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 1;
+    }
+    
+    .profile-img:hover {
+      filter: grayscale(0);
+      transform: scale(1.05);
+    }
+    
+    .profile-img:hover::before {
+      opacity: 1;
+    }
+    
+    .profile-img img {
+      transition: transform 0.5s ease;
+    }
+    
+    .profile-img:hover img {
+      transform: scale(1.1);
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 4px;
+      bottom: -10px;
+      left: 0;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+    
+    .skill-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    
+    .skill-progress {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      width: 0;
+      transition: width 1.5s ease-in-out;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+    }
+    
+    .btn-outline {
+      border: 2px solid var(--primary);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-outline:hover {
+      background: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+      }
+    }
+    
+    .typewriter {
+      overflow: hidden;
+      border-right: 2px solid var(--primary);
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--primary) }
+    }
+    
+    .social-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-5px);
+    }
+    
+    .stats-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .stats-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+  </style>
+</head>
+<body class="text-white font-sans">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-lg z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+      <div class="flex items-center">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 mr-3 flex items-center justify-center">
+          <span class="font-bold text-white">M</span>
+        </div>
+        <div class="text-blue-400 font-bold text-xl">Morris Muchiri</div>
+      </div>
+      <div class="space-x-6 text-gray-300 text-sm md:text-base hidden md:flex">
+        <a href="index.html" class="text-blue-500 font-semibold">About Me</a>
+        <a href="projects.html" class="hover:text-blue-400 transition-colors">Projects</a>
+        <a href="skills.html" class="hover:text-blue-400 transition-colors">Skills & Experience</a>
+        <a href="education.html" class="hover:text-blue-400 transition-colors">Education</a>
+        <a href="contact.html" class="hover:text-blue-400 transition-colors">Contact</a>
+        <a href="Morris Muchiri resume.pdf" download class="resume-btn bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-md ml-4 font-semibold transition-all shadow-lg">Resume</a>
+      </div>
+      
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-gray-800 px-6 py-4">
+      <div class="flex flex-col space-y-4">
+        <a href="index.html" class="text-blue-500 font-semibold">About Me</a>
+        <a href="projects.html" class="text-gray-300 hover:text-blue-400 transition-colors">Projects</a>
+        <a href="skills.html" class="text-gray-300 hover:text-blue-400 transition-colors">Skills & Experience</a>
+        <a href="education.html" class="text-gray-300 hover:text-blue-400 transition-colors">Education</a>
+        <a href="contact.html" class="text-gray-300 hover:text-blue-400 transition-colors">Contact</a>
+        <a href="Morris Muchiri resume.pdf" download class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-md font-semibold transition-all text-center mt-2">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main class="pt-24 max-w-7xl mx-auto px-6">
+    <section class="flex flex-col md:flex-row items-center justify-between rounded-2xl p-8 md:p-12 mb-16 fade-in bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+      <!-- Background decoration -->
+      <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-blue-500 opacity-10 blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-purple-500 opacity-10 blur-3xl"></div>
+      
+      <!-- Profile Image -->
+      <div class="w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden shadow-2xl border-4 border-blue-500 mb-8 md:mb-0 md:mr-12 profile-img pulse">
+        <img src="profile.jpeg" alt="Morris Muchiri" class="w-full h-full object-cover" />
+      </div>
+
+      <!-- Introduction -->
+      <div class="text-center md:text-left flex-1 z-10">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
+          Hi, I'm <span class="gradient-text">Morris Muchiri</span>
+        </h1>
+        <div class="typewriter text-xl md:text-2xl text-gray-300 mb-6 max-w-xl">
+          Software Developer & Creative Designer
+        </div>
+        <p class="text-gray-300 text-lg max-w-xl mb-8">
+          A versatile professional blending <span class="text-blue-400 font-semibold">development</span>, 
+          <span class="text-green-400 font-semibold">design</span>, and 
+          <span class="text-purple-400 font-semibold">networking</span> expertise to create 
+          stunning, functional solutions that solve real-world problems.
+        </p>
+
+        <!-- Stats -->
+        <div class="flex flex-wrap justify-center md:justify-start gap-4 mb-8">
+          <div class="stats-card px-4 py-2 rounded-lg text-center">
+            <div class="text-2xl font-bold text-blue-400">50+</div>
+            <div class="text-gray-400 text-sm">Projects Completed</div>
+          </div>
+          <div class="stats-card px-4 py-2 rounded-lg text-center">
+            <div class="text-2xl font-bold text-green-400">4+</div>
+            <div class="text-gray-400 text-sm">Years Experience</div>
+          </div>
+          <div class="stats-card px-4 py-2 rounded-lg text-center">
+            <div class="text-2xl font-bold text-purple-400">30+</div>
+            <div class="text-gray-400 text-sm">Happy Clients</div>
+          </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="flex justify-center md:justify-start space-x-6 mb-8">
+          <a href="https://github.com/trippiieeM" target="_blank" aria-label="GitHub" class="social-icon text-gray-400 hover:text-blue-400 transition-all text-2xl">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/yourusername" target="_blank" aria-label="LinkedIn" class="social-icon text-gray-400 hover:text-blue-400 transition-all text-2xl">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://dribbble.com/yourusername" target="_blank" aria-label="Dribbble" class="social-icon text-gray-400 hover:text-blue-400 transition-all text-2xl">
+            <i class="fab fa-dribbble"></i>
+          </a>
+          <a href="https://twitter.com/yourusername" target="_blank" aria-label="Twitter" class="social-icon text-gray-400 hover:text-blue-400 transition-all text-2xl">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+          <a href="projects.html" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg text-center">
+            View My Work
+          </a>
+          <a href="contact.html" class="btn-outline text-white font-semibold py-3 px-8 rounded-lg text-center">
+            Get In Touch
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="floating-card rounded-2xl p-8 md:p-10 mb-16 fade-in">
+      <h2 class="section-title text-3xl font-bold">About Me</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div>
+          <p class="text-gray-300 leading-relaxed text-lg mb-6">
+            With a passion for user-centric design and robust coding practices, I create solutions that bridge design and technology. 
+            My work spans <span class="text-blue-400 font-medium">Android app development</span>, 
+            <span class="text-green-400 font-medium">graphic design</span>, 
+            <span class="text-purple-400 font-medium">UI/UX design</span>, 
+            <span class="text-yellow-400 font-medium">web applications</span>, and 
+            <span class="text-red-400 font-medium">network configuration</span>.
+          </p>
+          <p class="text-gray-300 leading-relaxed">
+            My toolkit includes <strong class="text-blue-400">JavaScript (React Native, React)</strong>, 
+            <strong class="text-blue-400">Flutter</strong>, 
+            <strong class="text-green-400">Python</strong>, 
+            <strong class="text-yellow-400">HTML/CSS</strong>, 
+            <strong class="text-purple-400">SQL</strong>, 
+            <strong class="text-pink-400">Figma</strong>, and 
+            <strong class="text-red-400">Adobe Creative Suite</strong>.  
+          </p>
+        </div>
+        <div>
+          <p class="text-gray-300 leading-relaxed mb-6">
+            Whether I'm developing a farmer's market AI application or setting up a corporate fiber network, 
+            I deliver practical, polished, and impactful work that solves real-world problems.
+          </p>
+          <p class="text-gray-300 leading-relaxed">
+            I thrive in collaborative environments where I can contribute my diverse skill set to create 
+            comprehensive solutions that address both technical requirements and user experience.
+          </p>
+          
+          <!-- Skills Progress -->
+          <div class="mt-8">
+            <div class="mb-4">
+              <div class="flex justify-between mb-1">
+                <span class="text-gray-300">Development</span>
+                <span class="text-blue-400">90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="90"></div>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <div class="flex justify-between mb-1">
+                <span class="text-gray-300">Design</span>
+                <span class="text-green-400">85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="85"></div>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <div class="flex justify-between mb-1">
+                <span class="text-gray-300">Networking</span>
+                <span class="text-yellow-400">80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" data-width="80"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Overview -->
+    <section class="mb-16 fade-in">
+      <h2 class="section-title text-3xl font-bold text-center">My Expertise</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Development -->
+        <div class="floating-card p-6 rounded-xl border-l-4 border-blue-500">
+          <div class="flex items-center mb-4">
+            <div class="bg-blue-500 bg-opacity-20 p-3 rounded-lg mr-4">
+              <i class="fas fa-code text-blue-400 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold">Development</h3>
+          </div>
+          <p class="text-gray-300 text-sm mb-4">Building robust applications with modern technologies and best practices.</p>
+          <ul class="text-gray-400 text-sm space-y-2">
+            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Mobile Apps</li>
+            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Web Applications</li>
+            <li class="flex items-center"><i class="fas fa-check text-blue-400 mr-2"></i> Backend Systems</li>
+          </ul>
+        </div>
+        
+        <!-- Design -->
+        <div class="floating-card p-6 rounded-xl border-l-4 border-green-500">
+          <div class="flex items-center mb-4">
+            <div class="bg-green-500 bg-opacity-20 p-3 rounded-lg mr-4">
+              <i class="fas fa-palette text-green-400 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold">Design</h3>
+          </div>
+          <p class="text-gray-300 text-sm mb-4">Creating visually appealing and user-friendly interfaces and graphics.</p>
+          <ul class="text-gray-400 text-sm space-y-2">
+            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> UI/UX Design</li>
+            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> Graphic Design</li>
+            <li class="flex items-center"><i class="fas fa-check text-green-400 mr-2"></i> Brand Identity</li>
+          </ul>
+        </div>
+        
+        <!-- Networking -->
+        <div class="floating-card p-6 rounded-xl border-l-4 border-yellow-500">
+          <div class="flex items-center mb-4">
+            <div class="bg-yellow-500 bg-opacity-20 p-3 rounded-lg mr-4">
+              <i class="fas fa-network-wired text-yellow-400 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold">Networking</h3>
+          </div>
+          <p class="text-gray-300 text-sm mb-4">Designing and implementing reliable network infrastructures.</p>
+          <ul class="text-gray-400 text-sm space-y-2">
+            <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i> Fiber Networks</li>
+            <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i> Router Configuration</li>
+            <li class="flex items-center"><i class="fas fa-check text-yellow-400 mr-2"></i> Troubleshooting</li>
+          </ul>
+        </div>
+        
+        <!-- Problem Solving -->
+        <div class="floating-card p-6 rounded-xl border-l-4 border-purple-500">
+          <div class="flex items-center mb-4">
+            <div class="bg-purple-500 bg-opacity-20 p-3 rounded-lg mr-4">
+              <i class="fas fa-lightbulb text-purple-400 text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold">Problem Solving</h3>
+          </div>
+          <p class="text-gray-300 text-sm mb-4">Analyzing challenges and developing effective, innovative solutions.</p>
+          <ul class="text-gray-400 text-sm space-y-2">
+            <li class="flex items-center"><i class="fas fa-check text-purple-400 mr-2"></i> Analytical Thinking</li>
+            <li class="flex items-center"><i class="fas fa-check text-purple-400 mr-2"></i> Creative Solutions</li>
+            <li class="flex items-center"><i class="fas fa-check text-purple-400 mr-2"></i> Technical Research</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy & Approach -->
+    <section class="floating-card rounded-2xl p-8 md:p-10 mb-16 fade-in">
+      <h2 class="section-title text-3xl font-bold text-center">My Philosophy</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center p-4">
+          <div class="gradient-bg rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <i class="fas fa-users text-white text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">User-Centered</h3>
+          <p class="text-gray-300">I prioritize the end-user experience in every project, ensuring solutions are intuitive, accessible, and delightful to use.</p>
+        </div>
+        
+        <div class="text-center p-4">
+          <div class="gradient-bg rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <i class="fas fa-code-branch text-white text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Clean & Efficient</h3>
+          <p class="text-gray-300">I write maintainable, scalable code and create designs that are both beautiful and functional with optimal performance.</p>
+        </div>
+        
+        <div class="text-center p-4">
+          <div class="gradient-bg rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <i class="fas fa-rocket text-white text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Innovative Solutions</h3>
+          <p class="text-gray-300">I leverage the latest technologies and creative approaches to solve complex problems with forward-thinking solutions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fun Facts -->
+    <section class="mb-16 fade-in">
+      <h2 class="section-title text-3xl font-bold text-center">Beyond Work</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="floating-card p-6 rounded-xl text-center transition-all duration-300 hover:border-blue-500">
+          <div class="bg-blue-500 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-mug-hot text-blue-400 text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Coffee Enthusiast</h3>
+          <p class="text-gray-400 text-sm">Fueled by quality coffee while coding and designing innovative solutions.</p>
+        </div>
+        
+        <div class="floating-card p-6 rounded-xl text-center transition-all duration-300 hover:border-green-500">
+          <div class="bg-green-500 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-book-reader text-green-400 text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Continuous Learner</h3>
+          <p class="text-gray-400 text-sm">Always exploring new technologies, design trends, and development methodologies.</p>
+        </div>
+        
+        <div class="floating-card p-6 rounded-xl text-center transition-all duration-300 hover:border-yellow-500">
+          <div class="bg-yellow-500 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-hiking text-yellow-400 text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Nature Explorer</h3>
+          <p class="text-gray-400 text-sm">Finding inspiration and balance through outdoor adventures and hiking.</p>
+        </div>
+        
+        <div class="floating-card p-6 rounded-xl text-center transition-all duration-300 hover:border-purple-500">
+          <div class="bg-purple-500 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-music text-purple-400 text-2xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Music Lover</h3>
+          <p class="text-gray-400 text-sm">Curating playlists for different coding moods and creative sessions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="text-center py-12 rounded-2xl fade-in relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-r from-blue-900 to-purple-900 opacity-90"></div>
+      <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-blue-500 opacity-20 blur-3xl"></div>
+      <div class="absolute -bottom-40 -left-40 w-80 h-80 rounded-full bg-purple-500 opacity-20 blur-3xl"></div>
+      
+      <div class="relative z-10">
+        <h2 class="text-3xl font-bold text-white mb-4">Let's Create Something Amazing Together</h2>
+        <p class="text-gray-300 mb-8 max-w-2xl mx-auto text-lg">I'm always excited to take on new challenges and collaborate on innovative projects that push boundaries.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="projects.html" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg inline-block">
+            View My Projects
+          </a>
+          <a href="contact.html" class="btn-outline text-white font-semibold py-3 px-8 rounded-lg inline-block">
+            Get In Touch
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-8 bg-gray-900 text-gray-500 border-t border-gray-800 mt-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          © <script>document.write(new Date().getFullYear())</script> Morris Muchiri. All rights reserved.
+        </div>
+        <div class="flex space-x-6">
+          <a href="https://github.com/trippiieeM" target="_blank" aria-label="GitHub" class="text-gray-500 hover:text-blue-400 transition-colors">
+            <i class="fab fa-github text-xl"></i>
+          </a>
+          <a href="https://linkedin.com/in/yourusername" target="_blank" aria-label="LinkedIn" class="text-gray-500 hover:text-blue-400 transition-colors">
+            <i class="fab fa-linkedin text-xl"></i>
+          </a>
+          <a href="https://dribbble.com/yourusername" target="_blank" aria-label="Dribbble" class="text-gray-500 hover:text-blue-400 transition-colors">
+            <i class="fab fa-dribbble text-xl"></i>
+          </a>
+          <a href="https://twitter.com/yourusername" target="_blank" aria-label="Twitter" class="text-gray-500 hover:text-blue-400 transition-colors">
+            <i class="fab fa-twitter text-xl"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Animation Script -->
+  <script>
+    // Fade-in animation for elements
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          
+          // Animate skill bars if they exist in this section
+          const skillBars = entry.target.querySelectorAll('.skill-progress');
+          if (skillBars.length > 0) {
+            setTimeout(() => {
+              skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = `${width}%`;
+              });
+            }, 300);
+          }
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(element => {
+      fadeObserver.observe(element);
+    });
+
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

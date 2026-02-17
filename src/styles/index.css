@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-light text-gray-800 dark:bg-dark dark:text-gray-200 font-sans antialiased transition-colors duration-500 relative selection:bg-accent selection:text-dark;
+        background-image:
+            radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.05) 0%, transparent 60%),
+            radial-gradient(circle at 100% 100%, rgba(15, 61, 46, 0.1) 0%, transparent 60%);
+    }
+
+    /* Noise Texture */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9998;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        opacity: 0.3;
+        mix-blend-mode: overlay;
+    }
+}
+
+::selection {
+    @apply bg-accent text-dark;
+}
