@@ -24,7 +24,7 @@ const Hero = () => {
                         className="mb-6 relative inline-block"
                     >
                         <div className="w-24 h-24 rounded-full border-4 border-accent/20 overflow-hidden mx-auto">
-                            <img src="/legacy/profile.jpeg" alt="Morris Muchiri" className="w-full h-full object-cover" />
+                            <img src={`${import.meta.env.BASE_URL}legacy/profile.jpeg`} alt="Morris Muchiri" className="w-full h-full object-cover" />
                         </div>
                     </motion.div>
 

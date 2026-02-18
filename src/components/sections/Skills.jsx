@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Layout, Database, Cpu, GitBranch, Terminal, Globe, Server } from 'lucide-react';
+import { Code, Layout, Database, Cpu, PenTool, Network, Terminal } from 'lucide-react';
 
 const skillCategories = [
     {
@@ -36,14 +36,33 @@ const skillCategories = [
         ]
     },
     {
-        title: "Machine Learning & Tools",
+        title: "Design & Creative",
+        icon: <PenTool size={24} />,
+        skills: [
+            { name: "Web & App Design", level: 85 },
+            { name: "Graphic Design", level: 80 },
+            { name: "UI/UX Principles", level: 75 },
+            { name: "Figma", level: 70 }
+        ]
+    },
+    {
+        title: "Networking & Operations",
+        icon: <Network size={24} />,
+        skills: [
+            { name: "Networking Technician", level: 85 },
+            { name: "Git / GitHub", level: 85 },
+            { name: "Linux Administration", level: 75 },
+            { name: "Cloud Basics", level: 70 }
+        ]
+    },
+    {
+        title: "Machine Learning & AI",
         icon: <Cpu size={24} />,
         skills: [
             { name: "Linear Regression", level: 70 },
             { name: "Isolation Forest", level: 60 },
-            { name: "Git", level: 85 },
-            { name: "GitHub", level: 80 },
-            { name: "VS Code", level: 90 }
+            { name: "Data Analysis", level: 75 },
+            { name: "Model Training", level: 65 }
         ]
     }
 ];
@@ -63,7 +82,7 @@ const Skills = () => {
                 <p className="text-gray-600 dark:text-gray-400">A comprehensive toolkit for building modern applications.</p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {skillCategories.map((category, index) => (
                     <motion.div
                         key={index}
