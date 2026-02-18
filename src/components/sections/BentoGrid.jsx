@@ -34,7 +34,7 @@ const BentoGrid = () => {
                     <div className="flex items-start gap-4 mb-4">
                         <div className="relative">
                             <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-accent/20">
-                                <img src="/legacy/profile.jpeg" alt="Morris Muchiri" className="w-full h-full object-cover" />
+                                <img src={`${import.meta.env.BASE_URL}legacy/profile.jpeg`} alt="Morris Muchiri" className="w-full h-full object-cover" />
                             </div>
                             <div className="absolute -bottom-1 -right-1 bg-accent text-dark p-1 rounded-full border-2 border-surface">
                                 <User size={12} />
