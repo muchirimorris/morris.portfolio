@@ -23,7 +23,7 @@ const projects = [
         id: 3,
         title: "SkillLink",
         category: "Social Platform",
-        year: "2023",
+        year: "2026",
         description: "Professional networking platform for skilled trades.",
         image: "/legacy/d3.jpeg"
     },
@@ -31,7 +31,7 @@ const projects = [
         id: 4,
         title: "Investor Portal",
         category: "FinTech",
-        year: "2023",
+        year: "2025",
         description: "Investment management and tracking dashboard.",
         image: "/legacy/ux ui.png"
     }
