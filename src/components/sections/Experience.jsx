@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, GraduationCap, Calendar } from 'lucide-react';
 
-const TimelineItem = ({ data, index }) => (
+export const TimelineItem = ({ data, index }) => (
     <motion.div
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -31,8 +31,7 @@ const TimelineItem = ({ data, index }) => (
     </motion.div>
 );
 
-const Experience = () => {
-    const experiences = [
+export const experiencesData = [
         {
             type: 'work',
             period: '2023 - Present',
@@ -51,8 +50,10 @@ const Experience = () => {
         },
     ];
 
+const Experience = () => {
+
     return (
-        <section id="experience" className="py-24 px-6 max-w-4xl mx-auto">
+        <section id="experience" className="py-8 px-6 max-w-4xl mx-auto">
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -65,7 +66,7 @@ const Experience = () => {
             </motion.div>
 
             <div className="space-y-0">
-                {experiences.map((exp, index) => (
+                {experiencesData.map((exp, index) => (
                     <TimelineItem key={index} data={exp} index={index} />
                 ))}
             </div>

@@ -45,7 +45,7 @@ const Hero = () => {
     const textToReveal = "Morris Muchiri".split("");
 
     return (
-        <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden bg-dark">
+        <section className="h-full w-full flex items-center justify-center px-6 relative overflow-hidden bg-dark">
 
             {/* Dynamic Background Glows */}
             <motion.div 

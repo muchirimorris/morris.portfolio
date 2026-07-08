@@ -4,7 +4,7 @@ import { Send, MapPin, Mail, Phone, ExternalLink } from 'lucide-react';
 
 const Contact = () => {
     return (
-        <section id="contact" className="py-24 px-6 max-w-4xl mx-auto">
+        <section id="contact" className="py-8 px-6 max-w-4xl mx-auto">
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}

@@ -14,9 +14,9 @@ const BentoCard = ({ children, className, delay = 0 }) => (
     </motion.div>
 );
 
-const BentoGrid = () => {
+export const BentoGridPart1 = () => {
     return (
-        <section id="bento" className="py-24 px-6 max-w-7xl mx-auto">
+        <section id="bento" className="py-8 px-6 max-w-7xl mx-auto flex flex-col h-full justify-center">
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -62,8 +62,37 @@ const BentoGrid = () => {
                     </a>
                 </BentoCard>
 
+                {/* Experience Preview - Medium */}
+                <BentoCard className="md:col-span-3 flex flex-col justify-between" delay={0.2}>
+                    <div className="flex items-center gap-3 mb-4">
+                        <Briefcase size={20} className="text-accent" />
+                        <h3 className="font-bold text-white">Experience Highlights</h3>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="p-4 bg-white/5 rounded-xl border border-white/5">
+                            <span className="text-xs text-accent">2023 - Present</span>
+                            <h4 className="font-bold text-white mt-1">Freelance Developer</h4>
+                            <p className="text-xs text-gray-400">AgriTech & SME Systems</p>
+                        </div>
+                        <div className="p-4 bg-white/5 rounded-xl border border-white/5">
+                            <span className="text-xs text-accent">Graduated</span>
+                            <h4 className="font-bold text-white mt-1">Dedan Kimathi Univ.</h4>
+                            <p className="text-xs text-gray-400">Bachelor of Business IT</p>
+                        </div>
+                    </div>
+                </BentoCard>
+            </div>
+        </section>
+    );
+};
+
+export const BentoGridPart2 = () => {
+    return (
+        <section id="bento-2" className="py-8 px-6 max-w-7xl mx-auto flex flex-col h-full justify-center">
+            <div className="grid grid-cols-1 gap-6">
+
                 {/* Skills - Tall */}
-                <BentoCard className="md:row-span-3 col-span-1" delay={0.2}>
+                <BentoCard className="col-span-1" delay={0.1}>
                     <div className="flex items-center gap-3 mb-6">
                         <Code size={20} className="text-accent" />
                         <h3 className="font-bold text-white">Tech Stack</h3>
@@ -104,28 +133,8 @@ const BentoGrid = () => {
                     </div>
                 </BentoCard>
 
-                {/* Experience Preview - Medium */}
-                <BentoCard className="md:col-span-2 flex flex-col justify-between" delay={0.3}>
-                    <div className="flex items-center gap-3 mb-4">
-                        <Briefcase size={20} className="text-accent" />
-                        <h3 className="font-bold text-white">Experience Highlights</h3>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="p-4 bg-white/5 rounded-xl border border-white/5">
-                            <span className="text-xs text-accent">2023 - Present</span>
-                            <h4 className="font-bold text-white mt-1">Freelance Developer</h4>
-                            <p className="text-xs text-gray-400">AgriTech & SME Systems</p>
-                        </div>
-                        <div className="p-4 bg-white/5 rounded-xl border border-white/5">
-                            <span className="text-xs text-accent">Graduated</span>
-                            <h4 className="font-bold text-white mt-1">Dedan Kimathi Univ.</h4>
-                            <p className="text-xs text-gray-400">Bachelor of Business IT</p>
-                        </div>
-                    </div>
-                </BentoCard>
-
                 {/* CTA - Small */}
-                <BentoCard className="md:col-span-2 bg-gradient-to-r from-primary-900 to-primary-800 border-none flex items-center justify-between" delay={0.4}>
+                <BentoCard className="col-span-1 bg-gradient-to-r from-primary-900 to-primary-800 border-none flex items-center justify-between" delay={0.2}>
                     <div>
                         <h3 className="text-xl font-bold text-white">Have a project in mind?</h3>
                         <p className="text-primary-200 text-sm">Let's build something great together.</p>
@@ -139,5 +148,3 @@ const BentoGrid = () => {
         </section>
     );
 };
-
-export default BentoGrid;

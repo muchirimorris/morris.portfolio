@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'fram
 import { Github, ExternalLink } from 'lucide-react';
 import MagneticWrapper from '../ui/MagneticWrapper';
 
-const ProjectCard = ({ project, index }) => {
+export const ProjectCard = ({ project, index }) => {
     const cardRef = useRef(null);
     
     // 3D Tilt Effect
@@ -34,28 +34,21 @@ const ProjectCard = ({ project, index }) => {
         y.set(0);
     };
 
-    // Scroll reveal
-    const { scrollYProgress } = useScroll({
-        target: cardRef,
-        offset: ["0 1", "1.2 1"]
-    });
-    
-    const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-    const opacityProgress = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
     return (
         <motion.div
             ref={cardRef}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
             style={{
-                scale: scaleProgress,
-                opacity: opacityProgress,
                 rotateX,
                 rotateY,
                 transformStyle: "preserve-3d"
             }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="group relative bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-accent/30 transition-colors duration-500 hover:shadow-2xl hover:shadow-primary-900/20 perspective-1000"
+            className="group relative bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-accent/30 transition-colors duration-500 hover:shadow-2xl hover:shadow-primary-900/20 perspective-1000 flex flex-col h-full"
         >
             {/* Image / Graphic Area */}
             <div className="h-64 bg-dark relative overflow-hidden" style={{ transform: "translateZ(30px)" }}>
@@ -118,8 +111,7 @@ const ProjectCard = ({ project, index }) => {
     );
 };
 
-const Projects = () => {
-    const projects = [
+export const projectsData = [
         {
             title: 'Podago',
             type: 'Mobile App',
@@ -176,8 +168,10 @@ const Projects = () => {
         }
     ];
 
+const Projects = () => {
+
     return (
-        <section id="projects" className="py-24 px-6 max-w-7xl mx-auto overflow-hidden">
+        <section id="projects" className="py-8 px-6 max-w-7xl mx-auto overflow-hidden">
             <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -190,7 +184,7 @@ const Projects = () => {
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 perspective-1000">
-                {projects.map((project, index) => (
+                {projectsData.map((project, index) => (
                     <ProjectCard key={index} project={project} index={index} />
                 ))}
             </div>
