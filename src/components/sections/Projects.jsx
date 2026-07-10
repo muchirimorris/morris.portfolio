@@ -111,7 +111,7 @@ export const ProjectCard = ({ project, index }) => {
     );
 };
 
-export const projectsData = [
+const projectsData = [
         {
             title: 'Podago',
             type: 'Mobile App',
@@ -169,21 +169,19 @@ export const projectsData = [
     ];
 
 const Projects = () => {
-
     return (
-        <section id="projects" className="py-8 px-6 max-w-7xl mx-auto overflow-hidden">
+        <section id="projects" className="min-h-screen py-24 px-6 md:px-20 max-w-7xl mx-auto flex flex-col justify-center overflow-hidden">
             <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, type: "spring" }}
-                className="mb-16"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center mb-16"
             >
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Featured <span className="text-accent">Projects</span></h2>
-                <div className="h-1 w-20 bg-accent rounded-full"></div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">Featured Projects</h2>
+                <div className="h-1 w-12 bg-accent rounded-full"></div>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 perspective-1000">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 perspective-1000">
                 {projectsData.map((project, index) => (
                     <ProjectCard key={index} project={project} index={index} />
                 ))}

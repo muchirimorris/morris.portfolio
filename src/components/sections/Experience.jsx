@@ -31,38 +31,47 @@ export const TimelineItem = ({ data, index }) => (
     </motion.div>
 );
 
-export const experiencesData = [
+const experiencesData = [
         {
             type: 'work',
-            period: '2023 - Present',
-            role: 'Freelance Developer',
-            title: 'AgriTech & SME Systems',
-            description: 'Developing custom mobile and web solutions for agricultural SMEs. Focusing on digitizing milk collection processes and farm management.',
-            tags: ['Flutter', 'React', 'Firebase', 'Data Visualization']
+            period: '2025',
+            role: 'Attachment',
+            title: 'IT & Network Support Technician',
+            description: 'Installed and configured WiFi networks and routers for home and small business clients across Nyeri County. Performed fiber splicing, cable termination, and network diagnostics for ISP-level connectivity projects. Resolved technical network faults and provided ongoing IT support and user training to clients.',
+            tags: ['WiFi Configuration', 'Fiber Splicing', 'IT Support']
         },
         {
             type: 'education',
-            period: 'Graduated 2023',
+            period: 'Expected Graduation: 2026',
             role: 'Bachelor Degree',
             title: 'Dedan Kimathi University of Technology',
-            description: 'Bachelor of Business Information Technology (BBIT). Specialized in Software Engineering and Database Management.',
-            tags: ['System Analysis', 'Database Design', 'Software Engineering']
+            description: 'Bachelor of Business Information Technology (BBIT). Relevant coursework: Systems Analysis & Design, Database Management, Mobile Application Development, Computer Networking.',
+            tags: ['Systems Analysis', 'Database Management', 'Networking']
         },
+        {
+            type: 'certification',
+            period: '2023 - 2024',
+            role: 'Cisco Networking Academy',
+            title: 'IT Certifications',
+            description: 'Introduction to Networks (ITN) [2023], NDG Linux Essentials [2024], IoT and Digital Transformation [2024].',
+            tags: ['Cisco', 'Linux', 'IoT']
+        }
     ];
 
 const Experience = () => {
-
     return (
-        <section id="experience" className="py-8 px-6 max-w-4xl mx-auto">
+        <section id="experience" className="min-h-screen py-24 px-6 md:px-20 max-w-4xl mx-auto flex flex-col justify-center">
             <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                className="mb-16 text-center"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="mb-16 text-center flex flex-col items-center"
             >
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-accent text-xs font-medium mb-4">
                     <Briefcase size={14} /> My Journey
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Experience & <span className="text-accent">Education</span></h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">Experience & Education</h2>
+                <div className="h-1 w-12 bg-accent rounded-full mb-8"></div>
             </motion.div>
 
             <div className="space-y-0">

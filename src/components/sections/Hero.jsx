@@ -1,170 +1,108 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
-import { TypeAnimation } from 'react-type-animation';
-import MagneticWrapper from '../ui/MagneticWrapper';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Linkedin, Instagram, Youtube, Github } from 'lucide-react';
+import profilePic from '../../assets/profile.jpeg';
 
 const Hero = () => {
-    const { scrollY } = useScroll();
-    const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-    const y2 = useTransform(scrollY, [0, 500], [0, -100]);
-    
-    // Dynamic Mouse following glow
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    
-    useEffect(() => {
-        const updateMousePosition = (e) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
-        };
-        window.addEventListener('mousemove', updateMousePosition);
-        return () => window.removeEventListener('mousemove', updateMousePosition);
-    }, []);
-
-    // Staggered text reveal variants
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.3
-            }
-        }
-    };
-    
-    const itemVariants = {
-        hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
-        visible: {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            transition: { type: "spring", stiffness: 100, damping: 10 }
-        }
-    };
-
-    const textToReveal = "Morris Muchiri".split("");
-
     return (
-        <section className="h-full w-full flex items-center justify-center px-6 relative overflow-hidden bg-dark">
-
-            {/* Dynamic Background Glows */}
-            <motion.div 
-                className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary-600/10 rounded-full blur-[150px] -z-10"
-                animate={{
-                    x: mousePosition.x - 300,
-                    y: mousePosition.y - 300,
-                }}
-                transition={{ type: "tween", ease: "easeOut", duration: 0.5 }}
-            />
-            <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-accent/20 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
-
-            <div className="max-w-4xl mx-auto text-center relative z-10">
-
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
+        <section id="hero" className="min-h-screen flex items-center justify-center px-6 md:px-20 pt-20">
+            <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                {/* Left Side: Content */}
+                <motion.div 
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="flex flex-col items-start"
                 >
-                    <motion.div
-                        variants={itemVariants}
-                        className="mb-6 relative inline-block"
-                    >
-                        <div className="w-24 h-24 rounded-full border-4 border-accent/20 overflow-hidden mx-auto shadow-[0_0_30px_rgba(34,197,94,0.3)]">
-                            <img src={`${import.meta.env.BASE_URL}legacy/profile.jpeg`} alt="Morris Muchiri" className="w-full h-full object-cover" />
-                        </div>
-                    </motion.div>
+                    <h2 className="text-3xl md:text-4xl text-white font-medium mb-2">Hello!! I'm</h2>
+                    <h1 className="text-5xl md:text-7xl font-bold text-accent mb-4 tracking-tight">
+                        Morris Muchiri
+                    </h1>
+                    <p className="text-lg md:text-xl text-gray-400 mb-10">
+                        Full Stack Developer, Flutter Engineer
+                    </p>
 
-                    <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold tracking-tight mb-6 flex flex-col md:flex-row items-center justify-center gap-4">
-                        <span>Hi, I'm</span>
-                        <span className="flex text-transparent bg-clip-text bg-gradient-to-r from-accent to-emerald-600">
-                            {textToReveal.map((char, index) => (
-                                <motion.span 
-                                    key={index} 
-                                    variants={itemVariants}
-                                    className="inline-block"
-                                >
-                                    {char === " " ? "\u00A0" : char}
-                                </motion.span>
-                            ))}
-                        </span>
-                    </motion.h1>
-                    
-                    <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-accent text-xs font-medium mb-8">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-                        </span>
-                        Available for work
-                    </motion.div>
+                    {/* Buttons */}
+                    <div className="flex items-center gap-6 mb-12">
+                        <a href="#contact" className="px-8 py-3 bg-accent text-dark font-bold rounded hover:bg-accent/90 transition-colors shadow-lg shadow-accent/20">
+                            Hire Me
+                        </a>
+                        <a href="#about" className="px-8 py-3 border border-transparent text-white hover:text-accent font-medium transition-colors">
+                            Know More
+                        </a>
+                    </div>
 
-                    <motion.div variants={itemVariants} className="text-2xl md:text-3xl font-medium text-gray-400 mb-8 h-12">
-                        Building smart solutions for{' '}
-                        <TypeAnimation
-                            sequence={[
-                                'Agriculture.',
-                                2000,
-                                'the Future.',
-                                2000,
-                                'Mobile.',
-                                2000,
-                            ]}
-                            wrapper="span"
-                            speed={50}
-                            repeat={Infinity}
-                            className="text-white border-b-2 border-accent pb-1"
-                        />
-                    </motion.div>
-
-                    <motion.p variants={itemVariants} className="text-lg text-gray-500 max-w-xl mx-auto mb-10 leading-relaxed">
-                        Software Developer specializing in <strong className="text-accent">AgriTech</strong> and Mobile Apps.
-                        Merging code with nature to create impactful digital ecosystems.
-                    </motion.p>
-
-                    <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <MagneticWrapper>
-                            <a
-                                href="#projects"
-                                className="px-8 py-4 bg-accent text-dark rounded-full font-bold flex items-center gap-2 transition-transform hover:scale-105"
-                            >
-                                View Projects <ArrowRight size={20} />
-                            </a>
-                        </MagneticWrapper>
-                        <MagneticWrapper>
-                            <a
-                                href="#contact"
-                                className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-full font-bold transition-transform hover:scale-105"
-                            >
-                                Contact Me
-                            </a>
-                        </MagneticWrapper>
-                    </motion.div>
-
-                    <motion.div variants={itemVariants} className="flex gap-6 justify-center mt-12">
-                        <MagneticWrapper>
-                            <a href="https://github.com/muchirimorris" className="text-gray-500 hover:text-white transition-colors block"><Github size={24} /></a>
-                        </MagneticWrapper>
-                        <MagneticWrapper>
-                            <a href="#" className="text-gray-500 hover:text-white transition-colors block"><Linkedin size={24} /></a>
-                        </MagneticWrapper>
-                        <MagneticWrapper>
-                            <a href="mailto:muchirimorris007@gmail.com" className="text-gray-500 hover:text-white transition-colors block"><Mail size={24} /></a>
-                        </MagneticWrapper>
-                    </motion.div>
+                    {/* Socials */}
+                    <div className="flex items-center gap-6">
+                        <a href="https://linkedin.com" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+                            <Linkedin size={24} />
+                        </a>
+                        <a href="https://instagram.com" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+                            <Instagram size={24} />
+                        </a>
+                        <a href="https://github.com/muchirimorris" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+                            <Github size={24} />
+                        </a>
+                        <a href="https://youtube.com" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+                            <Youtube size={24} />
+                        </a>
+                    </div>
                 </motion.div>
+
+                {/* Right Side: Image and Blob */}
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="relative flex justify-center items-center lg:ml-auto"
+                >
+                    {/* Orange Blob */}
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] -z-10 fill-accent opacity-90">
+                        <path d="M48.7,-74.6C60.7,-64.5,66.4,-46.6,73,-30.2C79.6,-13.8,87.1,1.1,84.7,14.6C82.3,28.1,70,40.3,57.1,49.8C44.2,59.3,30.7,66.1,16.2,71.7C1.7,77.3,-13.8,81.7,-27.6,77.5C-41.4,73.3,-53.5,60.5,-63.3,46.8C-73.1,33.1,-80.6,18.5,-82.1,3.4C-83.6,-11.7,-79,-27.3,-69.5,-39.8C-60,-52.3,-45.6,-61.7,-31.6,-70.2C-17.6,-78.7,-4,-86.3,7.6,-83.4C19.2,-80.5,36.7,-84.7,48.7,-74.6Z" transform="translate(100 100) scale(1.1)" />
+                    </svg>
+
+                    {/* Circular Text */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] animate-[spin_20s_linear_infinite]">
+                        <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+                            <path id="circlePath" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none" />
+                            <text className="text-[7px] tracking-[0.2em] uppercase fill-white font-medium" >
+                                <textPath href="#circlePath" startOffset="0%">
+                                    Developing with passion, precision, and purpose •
+                                </textPath>
+                            </text>
+                            <text className="text-[7px] tracking-[0.2em] uppercase fill-white font-medium" >
+                                <textPath href="#circlePath" startOffset="50%">
+                                    Developing with passion, precision, and purpose •
+                                </textPath>
+                            </text>
+                        </svg>
+                    </div>
+
+                    {/* Image Placeholder */}
+                    <div className="w-[300px] h-[350px] overflow-hidden z-10 rounded-b-full">
+                        <img 
+                            src={profilePic}
+                            alt="Morris Muchiri" 
+                            className="w-full h-full object-cover rounded-b-full"
+                        />
+                    </div>
+                </motion.div>
+
             </div>
-            
-            {/* Parallax Elements (Optional enhancement) */}
-            <motion.div style={{ y: y1 }} className="absolute left-[10%] top-[20%] text-white/5">
-                <svg width="100" height="100" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="50"/>
-                </svg>
+
+            {/* Scroll Mouse Icon */}
+            <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex justify-center"
+            >
+                <div className="w-6 h-10 rounded-full border-2 border-white/30 flex justify-center p-1">
+                    <div className="w-1 h-2 bg-white rounded-full animate-bounce"></div>
+                </div>
             </motion.div>
-            <motion.div style={{ y: y2 }} className="absolute right-[15%] bottom-[30%] text-white/5">
-                <svg width="80" height="80" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="4" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="10" y="10" width="80" height="80"/>
-                </svg>
-            </motion.div>
-        </section >
+        </section>
     );
 };
 

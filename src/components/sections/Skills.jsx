@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Layout, Database, Cpu, PenTool, Network, Terminal } from 'lucide-react';
+import { Code, Layout, Database, Cpu, PenTool, Network } from 'lucide-react';
 
-export const skillCategories = [
+const skillCategories = [
     {
         title: "Programming Languages",
         icon: <Code size={24} />,
@@ -67,39 +67,60 @@ export const skillCategories = [
     }
 ];
 
-export const SkillCategoryCard = ({ category, index }) => (
-    <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: (index % 2) * 0.1 }}
-        className="bg-white/50 dark:bg-surface backdrop-blur-md border border-gray-200 dark:border-white/5 p-6 rounded-2xl hover:border-accent/30 transition-all hover:shadow-lg dark:hover:shadow-primary-900/10 group h-full flex flex-col"
-    >
-        <div className="flex items-center gap-3 mb-6">
-            <div className="p-3 bg-primary-100 dark:bg-white/5 rounded-xl text-primary-600 dark:text-accent group-hover:bg-accent/10 transition-colors">
-                {category.icon}
+const Skills = () => {
+    return (
+        <section id="skills" className="min-h-screen py-24 px-6 md:px-20 max-w-7xl mx-auto flex flex-col justify-center">
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center mb-16"
+            >
+                <h2 className="text-4xl font-bold text-white mb-2">Technical Skills</h2>
+                <div className="h-1 w-12 bg-accent rounded-full"></div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {skillCategories.map((category, index) => (
+                    <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="bg-surface border border-white/5 p-8 rounded-2xl hover:border-accent/30 transition-all group flex flex-col"
+                    >
+                        <div className="flex items-center gap-4 mb-8">
+                            <div className="text-accent group-hover:scale-110 transition-transform">
+                                {category.icon}
+                            </div>
+                            <h3 className="font-bold text-white text-lg">{category.title}</h3>
+                        </div>
+
+                        <div className="space-y-5 flex-1">
+                            {category.skills.map((skill) => (
+                                <div key={skill.name}>
+                                    <div className="flex justify-between text-sm mb-2">
+                                        <span className="text-gray-400">{skill.name}</span>
+                                        <span className="text-accent font-medium">{skill.level}%</span>
+                                    </div>
+                                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                        <motion.div
+                                            initial={{ width: 0 }}
+                                            whileInView={{ width: `${skill.level}%` }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 1, delay: 0.2 }}
+                                            className="h-full bg-accent rounded-full"
+                                        ></motion.div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                ))}
             </div>
-            <h3 className="font-bold text-gray-900 dark:text-white">{category.title}</h3>
-        </div>
+        </section>
+    );
+};
 
-        <div className="space-y-4 flex-1">
-            {category.skills.map((skill) => (
-                <div key={skill.name}>
-                    <div className="flex justify-between text-sm mb-1">
-                        <span className="text-gray-700 dark:text-gray-300">{skill.name}</span>
-                        <span className="text-sm text-primary-600 dark:text-accent font-medium">{skill.level}%</span>
-                    </div>
-                    <div className="h-1.5 w-full bg-gray-200 dark:bg-white/5 rounded-full overflow-hidden">
-                        <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${skill.level}%` }}
-                            transition={{ duration: 1, delay: 0.2 }}
-                            className="h-full bg-primary-500 dark:bg-accent rounded-full"
-                        ></motion.div>
-                    </div>
-                </div>
-            ))}
-        </div>
-    </motion.div>
-);
-
-                    {/* Content will be handled in App.jsx */}
+export default Skills;

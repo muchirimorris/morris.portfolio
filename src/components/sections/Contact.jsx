@@ -1,72 +1,99 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, MapPin, Mail, Phone, ExternalLink } from 'lucide-react';
+import { Mail, Linkedin, Instagram, Twitter } from 'lucide-react';
 
 const Contact = () => {
+    const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Add form submission logic here
+        console.log('Form submitted:', formState);
+        alert('Thanks for your message!');
+        setFormState({ name: '', email: '', message: '' });
+    };
+
     return (
-        <section id="contact" className="py-8 px-6 max-w-4xl mx-auto">
+        <section id="contact" className="min-h-screen py-24 px-6 md:px-20 max-w-7xl mx-auto flex flex-col justify-center">
             <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                className="text-center mb-16"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center mb-16"
             >
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-accent text-xs font-medium mb-4">
-                    <Mail size={14} /> Get in Touch
-                </div>
-                <h2 className="text-4xl font-bold text-white mb-6">Let's build something <span className="text-accent">great</span></h2>
-                <p className="text-gray-400">
-                    Open for opportunities in Mobile App Development and AgriTech.
-                </p>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">Let's Talk</h2>
+                <div className="h-1 w-12 bg-accent rounded-full"></div>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 bg-surface border border-white/5 p-8 rounded-3xl">
-                <div>
-                    <h3 className="text-xl font-bold text-white mb-6">Contact Info</h3>
-                    <div className="space-y-6">
-                        <div className="flex items-center gap-4 text-gray-400">
-                            <div className="p-3 bg-white/5 rounded-full text-accent"><Mail size={20} /></div>
-                            <span>muchirimorris007@gmail.com</span>
-                        </div>
-                        <div className="flex items-center gap-4 text-gray-400">
-                            <div className="p-3 bg-white/5 rounded-full text-accent"><MapPin size={20} /></div>
-                            <span>Nyeri, Kenya</span>
+            <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-surface border border-white/5 rounded-3xl p-8 md:p-16 shadow-2xl max-w-5xl mx-auto w-full"
+            >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                    {/* Left: Social Media */}
+                    <div>
+                        <h3 className="text-2xl font-bold text-white mb-8 text-center md:text-left">Social Media</h3>
+                        <div className="space-y-6">
+                            <a href="https://linkedin.com" target="_blank" className="flex items-center gap-4 text-gray-400 hover:text-white transition-colors group">
+                                <Linkedin className="group-hover:text-accent transition-colors" />
+                                <span>Connect On Linked In</span>
+                            </a>
+                            <a href="https://instagram.com" target="_blank" className="flex items-center gap-4 text-gray-400 hover:text-white transition-colors group">
+                                <Instagram className="group-hover:text-accent transition-colors" />
+                                <span>DM Me On Instagram</span>
+                            </a>
+                            <a href="mailto:morris@example.com" className="flex items-center gap-4 text-gray-400 hover:text-white transition-colors group">
+                                <Mail className="group-hover:text-accent transition-colors" />
+                                <span>Mail Your Idea</span>
+                            </a>
+                            <a href="https://twitter.com" target="_blank" className="flex items-center gap-4 text-gray-400 hover:text-white transition-colors group">
+                                <Twitter className="group-hover:text-accent transition-colors" />
+                                <span>Ping Me On Twitter</span>
+                            </a>
                         </div>
                     </div>
 
-                    <div className="mt-12">
-                        <h4 className="text-sm font-bold text-white mb-4">Connect</h4>
-                        <div className="flex gap-4">
-                            <a href="#" className="text-gray-400 hover:text-accent transition-colors">LinkedIn</a>
-                            <a href="#" className="text-gray-400 hover:text-accent transition-colors">GitHub</a>
-                            <a href="#" className="text-gray-400 hover:text-accent transition-colors">Twitter</a>
-                        </div>
+                    {/* Right: Contact Form */}
+                    <div>
+                        <h3 className="text-2xl font-bold text-white mb-8 text-center md:text-left">Contact Form</h3>
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                            <input 
+                                type="text" 
+                                placeholder="Name" 
+                                required
+                                value={formState.name}
+                                onChange={e => setFormState({...formState, name: e.target.value})}
+                                className="w-full bg-dark border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors placeholder-gray-600"
+                            />
+                            <input 
+                                type="email" 
+                                placeholder="Email" 
+                                required
+                                value={formState.email}
+                                onChange={e => setFormState({...formState, email: e.target.value})}
+                                className="w-full bg-dark border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors placeholder-gray-600"
+                            />
+                            <textarea 
+                                placeholder="Message" 
+                                required
+                                rows={4}
+                                value={formState.message}
+                                onChange={e => setFormState({...formState, message: e.target.value})}
+                                className="w-full bg-dark border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors placeholder-gray-600 resize-none"
+                            ></textarea>
+                            
+                            <button 
+                                type="submit"
+                                className="self-center md:self-end px-10 py-3 bg-accent text-dark font-bold rounded-xl hover:bg-accent/90 transition-colors mt-2"
+                            >
+                                Submit
+                            </button>
+                        </form>
                     </div>
                 </div>
-
-                <form className="space-y-4">
-                    <input
-                        type="text"
-                        placeholder="Name"
-                        className="w-full bg-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent/50 transition-colors"
-                    />
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        className="w-full bg-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent/50 transition-colors"
-                    />
-                    <textarea
-                        rows="4"
-                        placeholder="Message"
-                        className="w-full bg-dark/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-accent/50 transition-colors"
-                    ></textarea>
-                    <button
-                        type="submit"
-                        className="w-full bg-accent hover:bg-accent/90 text-dark font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all"
-                    >
-                        Send Message <Send size={18} />
-                    </button>
-                </form>
-            </div>
+            </motion.div>
         </section>
     );
 };

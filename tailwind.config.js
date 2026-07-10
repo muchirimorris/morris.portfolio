@@ -9,26 +9,26 @@ export default {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: '#0F3D2E', // Deep Green
-                    50: '#f2fcf5',
-                    100: '#e1f8e8',
-                    200: '#c3eed3',
-                    300: '#94deb5',
-                    400: '#5ac592',
-                    500: '#34a872',
-                    600: '#268759',
-                    700: '#216c49',
-                    800: '#1e563d',
-                    900: '#0F3D2E', // Base Primary
-                    950: '#0B0F0C', // Darkest
+                    DEFAULT: '#1A1A1A', // Dark Grey Surface
+                    50: '#f6f6f6',
+                    100: '#e7e7e7',
+                    200: '#d1d1d1',
+                    300: '#b0b0b0',
+                    400: '#888888',
+                    500: '#6d6d6d',
+                    600: '#5d5d5d',
+                    700: '#4f4f4f',
+                    800: '#454545',
+                    900: '#3d3d3d', // Card Surface
+                    950: '#1A1A1A', // Base Primary
                 },
                 accent: {
-                    DEFAULT: '#22C55E', // Light Green
-                    glow: '#4ade80',
+                    DEFAULT: '#F59E0B', // Vibrant Orange
+                    glow: '#FBBF24',
                 },
-                dark: '#0B0F0C',      // Deep Background
-                light: '#F0FDF4',     // Light Greenish-White (Mint Cream)
-                surface: '#121814',   // Card Surface
+                dark: '#0A0A0A',      // Deep Background (Almost Black)
+                light: '#FAFAFA',     // Light Background
+                surface: '#171717',   // Card Surface
                 secondary: '#9CA3AF', // Gray Text
             },
             fontFamily: {
