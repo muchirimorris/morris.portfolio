@@ -4,13 +4,32 @@ import { Mail, Linkedin, Instagram, Twitter } from 'lucide-react';
 
 const Contact = () => {
     const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+    const [status, setStatus] = useState(''); // '', 'loading', 'success', 'error'
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Add form submission logic here
-        console.log('Form submitted:', formState);
-        alert('Thanks for your message!');
-        setFormState({ name: '', email: '', message: '' });
+        setStatus('loading');
+        
+        try {
+            const response = await fetch('https://formspree.io/f/xwpojojp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formState)
+            });
+            
+            if (response.ok) {
+                setStatus('success');
+                setFormState({ name: '', email: '', message: '' });
+                setTimeout(() => setStatus(''), 5000); // Clear success message after 5s
+            } else {
+                setStatus('error');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            setStatus('error');
+        }
     };
 
     return (
@@ -86,9 +105,18 @@ const Contact = () => {
                             
                             <button 
                                 type="submit"
-                                className="self-center md:self-end px-10 py-3 bg-accent text-dark font-bold rounded-xl hover:bg-accent/90 transition-colors mt-2"
+                                disabled={status === 'loading'}
+                                className={`self-center md:self-end px-10 py-3 font-bold rounded-xl transition-colors mt-2 ${
+                                    status === 'loading' ? 'bg-gray-600 text-gray-300 cursor-not-allowed' :
+                                    status === 'success' ? 'bg-green-500 text-white' :
+                                    status === 'error' ? 'bg-red-500 text-white' :
+                                    'bg-accent text-dark hover:bg-accent/90'
+                                }`}
                             >
-                                Submit
+                                {status === 'loading' ? 'Sending...' : 
+                                 status === 'success' ? 'Message Sent!' : 
+                                 status === 'error' ? 'Failed - Try Again' : 
+                                 'Submit'}
                             </button>
                         </form>
                     </div>
