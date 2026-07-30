@@ -72,14 +72,9 @@ const Hero = () => {
                             <div className="w-full h-full animate-[spin_20s_linear_infinite]">
                                 <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
                                     <path id="circlePath" d="M 50, 50 m -45, 0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" fill="none" />
-                                    <text className="text-[6.5px] tracking-[0.2em] uppercase fill-white font-medium" >
+                                    <text className="text-[8.5px] tracking-[0.15em] uppercase fill-white font-bold" >
                                         <textPath href="#circlePath" startOffset="0%">
-                                            Available for Freelance Work • Let's build something • 
-                                        </textPath>
-                                    </text>
-                                    <text className="text-[6.5px] tracking-[0.2em] uppercase fill-white font-medium" >
-                                        <textPath href="#circlePath" startOffset="50%">
-                                            Available for Freelance Work • Let's build something • 
+                                            CRAFTING DIGITAL EXPERIENCES • PIXEL PERFECT CODE • CRAFTING DIGITAL EXPERIENCES • PIXEL PERFECT CODE •
                                         </textPath>
                                     </text>
                                 </svg>
