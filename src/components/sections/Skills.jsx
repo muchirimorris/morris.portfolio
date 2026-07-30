@@ -18,8 +18,8 @@ const skillCategories = [
         title: "Frameworks & Libraries",
         icon: <Layout size={24} />,
         skills: [
-            { name: "React Native", level: 88 },
-            { name: "Flutter", level: 82 },
+            { name: "React Native", level: 70 },
+            { name: "Flutter", level: 85 },
             { name: "Next.js", level: 78 },
             { name: "React", level: 90 },
             { name: "Tailwind CSS", level: 85 }
@@ -31,8 +31,8 @@ const skillCategories = [
         skills: [
             { name: "Firebase", level: 80 },
             { name: "Supabase", level: 70 },
-            { name: "Node.js", level: 75 },
-            { name: "MySQL", level: 65 }
+            { name: "Django", level: 75 },
+            { name: "PostgreSQL", level: 65 }
         ]
     },
     {

@@ -42,7 +42,7 @@ const experiencesData = [
         },
         {
             type: 'education',
-            period: 'Expected Graduation: 2026',
+            period: 'Graduated: 12/6/2026',
             role: 'Bachelor Degree',
             title: 'Dedan Kimathi University of Technology',
             description: 'Bachelor of Business Information Technology (BBIT). Relevant coursework: Systems Analysis & Design, Database Management, Mobile Application Development, Computer Networking.',
