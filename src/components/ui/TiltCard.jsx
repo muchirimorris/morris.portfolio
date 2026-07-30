@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 const TiltCard = ({ children, className }) => {

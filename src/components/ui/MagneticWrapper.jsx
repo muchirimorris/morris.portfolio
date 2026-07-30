@@ -1,9 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
 
 const MagneticWrapper = ({ children, className = "" }) => {
     const ref = useRef(null);
-    const [isHovered, setIsHovered] = useState(false);
     
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -23,7 +22,6 @@ const MagneticWrapper = ({ children, className = "" }) => {
     };
 
     const handleMouseLeave = () => {
-        setIsHovered(false);
         mouseX.set(0);
         mouseY.set(0);
     };
@@ -32,7 +30,6 @@ const MagneticWrapper = ({ children, className = "" }) => {
         <motion.div
             ref={ref}
             onMouseMove={handleMouseMove}
-            onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={handleMouseLeave}
             style={{
                 x: springX,

@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
+import { motion, useTransform, useSpring, useMotionValue } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
 import MagneticWrapper from '../ui/MagneticWrapper';
 
-export const ProjectCard = ({ project, index }) => {
+export const ProjectCard = ({ project }) => {
     const cardRef = useRef(null);
     
     // 3D Tilt Effect
@@ -118,17 +118,8 @@ const projectsData = [
             description: 'A comprehensive Milk Collection & Farmer Support System. Streamlines milk collection, tracks records in real-time, and provides data visualization for daily/monthly records.',
             image: "https://images.unsplash.com/photo-1527153857401-418e275d27b8?q=80&w=1000&auto=format&fit=crop",
             stack: ['Flutter', 'Firebase', 'Supabase', 'Dart'],
-            github: '#',
+            github: 'https://github.com/muchirimorris/admin-portal-podago',
             demo: 'https://adminportalpodago.netlify.app/'
-        },
-        {
-            title: 'MkulimaSmart',
-            type: 'AI Platform',
-            description: 'AI-Powered Farmer Support platform. Uses Machine Learning to predict crop yields and diagnose plant diseases from images.',
-            image: "https://images.unsplash.com/photo-1625246333195-58f21a41a4f7?q=80&w=1000&auto=format&fit=crop",
-            stack: ['React Native', 'TensorFlow', 'Python', 'API'],
-            github: '#',
-            demo: '#'
         },
         {
             title: 'Chak Property Platform',
@@ -144,8 +135,8 @@ const projectsData = [
             type: 'Mobile App (Private)',
             description: 'A smart dairy toolkit for farmers. Provides essential utilities and data management for dairy operations.',
             image: "https://images.unsplash.com/photo-1546445317-29f4545e9d53?q=80&w=1000&auto=format&fit=crop",
-            stack: ['Dart', 'Flutter'],
-            github: '#',
+            stack: ['Dart', 'Flutter', 'Django', 'PostgreSQL'],
+            github: 'https://github.com/muchirimorris/Dairy-Farmer-Toolkit',
             demo: '#'
         },
         {
@@ -182,8 +173,8 @@ const Projects = () => {
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 perspective-1000">
-                {projectsData.map((project, index) => (
-                    <ProjectCard key={index} project={project} index={index} />
+                {projectsData.map((project, idx) => (
+                    <ProjectCard key={idx} project={project} />
                 ))}
             </div>
         </section>
